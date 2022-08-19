@@ -992,6 +992,9 @@ namespace MetalCore.DAL.Models
             }
         }
 
+
+        //''''''''''''''''''''PDF
+
         public List<TrabajoObj> ConsultarUTrabajoPDF(int idUsuario)
         {
             List<TrabajoObj> listaPDFS = new List<TrabajoObj>();
@@ -1005,22 +1008,16 @@ namespace MetalCore.DAL.Models
                     //Se guardan los datos de la consulta
                     var datos = (from x in contex.Trabajo
                                  where x.idUsuario == idUsuario
-                                 join e in contex.MaterialesTrabajo on x.idTrabajo equals e.idTrabajo
+                                 join e in contex.Trabajo on x.idTrabajo equals e.idTrabajo
                                  select x).ToList();
 
 
                     foreach (var item in datos)
                     {
-                        var trabajo = (from x in contex.MaterialesTrabajo
-                                       where x.idTrabajo == item.idTrabajo
-                                       select x).FirstOrDefault();
-
                         var nombreTraba = (from x in contex.Trabajo where x.idTrabajo == item.idTrabajo select x).FirstOrDefault();
 
                         var nombreUsu = (from x in contex.Empleado where x.idUsuario == item.idUsuario select x).FirstOrDefault();
                         var estadoTrabajo = (from x in contex.EstadoTrabajo where x.idEstado == item.idEstadoTrabajo select x).FirstOrDefault();
-                        var nombreMateri = (from x in contex.MaterialesTrabajo where x.idTrabajo == item.idTrabajo select x).FirstOrDefault();
-                        var produ = (from x in contex.Productos where x.idProducto == nombreMateri.idProducto select x).FirstOrDefault();
                         listaPDFS.Add(new TrabajoObj
                         {
                             IdTrabajo = item.idTrabajo,
@@ -1028,8 +1025,8 @@ namespace MetalCore.DAL.Models
                             Apellido = nombreUsu.apellido,
                             NombreCliente = item.nombreCliente,
                             Fecha = item.fecha.Value,
-                            NombrePro = produ.nombre,
-                            Cantidad = nombreMateri.cantidad.Value,
+                            Descripcion = item.descripcion,
+                            Direccion = item.direccion,
                             Estado = estadoTrabajo.estado,
                         });
 

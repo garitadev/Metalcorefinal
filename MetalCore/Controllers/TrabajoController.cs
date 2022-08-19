@@ -39,7 +39,8 @@ namespace SB_Admin.Controllers
                     ViewBag.User = user;
                     ViewBag.listaEstados = estados;
                     ViewBag.listaTrabajos = respuesta;
-
+                    TrabajoModel modeloss = new TrabajoModel();
+                    ViewBag.listaUsuarios = modeloss.ConsultarEmpleadoCombo();
 
                     return View();
                 }
