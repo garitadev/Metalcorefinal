@@ -1,0 +1,44 @@
+﻿
+
+@{
+    //Lista de productos
+    @model IEnumerable<MetalCore.ETL.Entities.TrabajoObj>
+}
+
+@{
+    ViewBag.Title = "Reporte";
+    Layout = null;
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<center><img class="mx-auto d-block" src="https://metalcorecr.azurewebsites.net/images/Grupo-Arte-Metal-logo-naranja-y-azul.png" alt="" width="200" height="200" /></center>
+<h2><em><strong>Reporte de todos los empleados</strong></em></h2>
+</br>
+<table class="table table-striped">
+    <thead>
+        <tr class="bg-primary">
+            <th>Nombre del empleado</th>
+            <th>Nombre del Cliente</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+
+        <tbody>
+            <tr>
+                <td>@item.NombreUsuario</td>
+                <td> @item.NombreCliente</td>
+                <td> @item.Fecha.Date.ToString("dd/MM/yyyy")</td>
+                <td>  @item.Estado</td>
+            </tr>
+
+        </tbody>
+    }
+</table>
+

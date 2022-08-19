@@ -1,0 +1,73 @@
+﻿
+@{ 
+    List<MetalCore.ETL.Entities.MaterialesOBJ> listaMateriales = ViewBag.listaMateriales;
+    @model MetalCore.ETL.Entities.TrabajoObj
+}
+
+@{
+    ViewBag.Title = "ConsultarMaterialesXTrabajo";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-primary">
+        <h6 class="m-0 font-weight-bold text-white">Productos X Trabajo</h6>
+    </div>
+    <div class="card-body">
+
+
+        <!--metodo-->
+        <div class="row">
+            <!--para las filas-->
+            <!--se crea la columna-->
+
+            <div class="col-4">
+                <div class="form-group">
+                    <label>Empleado a cargo:</label>
+                    <input class="form-control" type="text" name="name" value='@Model.Nombre' disabled />
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label>Descripcion:</label>
+                    <input class="form-control" type="text" name="name" value='@Model.Descripcion' disabled />
+                </div>
+
+                <br />
+            </div>
+
+
+            <div class="col-4">
+                <div class="form-group">
+                    <label>Cliente:</label>
+                    <input class="form-control" type="text" name="name" value='@Model.NombreCliente' disabled />
+                </div>
+            </div>
+
+            <div class="col-12" >
+                <div class="form-group">
+                    <label>Dirección:</label>
+                    <input class="form-control" type="text" name="name" value='@Model.Direccion' disabled />
+                </div>
+            </div>
+
+
+            <div class="col-6 ">
+                <div class="form-group">
+                    <label>Productos a utilizar:</label>
+                    <ul class="list-group">
+                        @foreach (var item in listaMateriales)
+                        {
+                            <li class="list-group-item">@item.NombreProducto</li>
+                        }
+                    </ul>
+                </div>
+
+
+            </div>
+
+
+
+            <!-- DataTales Example -->
+        </div>
+    </div>
+</div>
