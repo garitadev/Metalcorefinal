@@ -17,34 +17,38 @@
 <center><img class="mx-auto d-block" src="https://metalcorecr.azurewebsites.net/images/Grupo-Arte-Metal-logo-naranja-y-azul.png" alt="" width="200" height="200" /></center>
 
 
-<h2><em><strong>Reporte de control del personal</strong></em></h2>
+<h2><em><strong>Reporte de trabajos </strong></em></h2>
+<em>Control de todos los trabajos de un empleado</em>
 </br>
-<table class="table table-striped">
-    <thead>
-        <tr class="bg-primary">
-            <th>Nombre del empleado</th>
-            <th>Nombre del Cliente</th>
-            <th>Fecha</th>
-            <th>Material usado</th>
-            <th>Cantidad usada</th>
-            <th>Estado</th>
-        </tr>
-    </thead>
-    @foreach (var item in Model)
-    {
-
-        <tbody>
-            <tr>
-                <td>@item.NombreUsuario<span>" "</span> @item.Apellido</td>
-              
-                <td> @item.NombreCliente</td>
-                <td> @item.Fecha.Date.ToString("dd/MM/yyyy")</td>
-                <td> @item.NombrePro</td>
-                <td> @item.Cantidad</td>
-                <td> @item.Estado</td>
+</br>
+<div class="table-responsive-xl">
+    <table class="table table-striped">
+        <thead>
+            <tr class="bg-primary">
+                <th>Empleado</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Descripcion</th>
+                <th>Direccion</th>
+                <th>Estado</th>
             </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
 
-        </tbody>
-    }
-</table>
+            <tbody>
+                <tr>
+                    <td>@item.NombreUsuario<span> </span> @item.Apellido</td>
 
+                    <td> @item.NombreCliente</td>
+                    <td> @item.Fecha.Date.ToString("dd/MM/yyyy")</td>
+                    <td> @item.Descripcion</td>
+                    <td> @item.Direccion</td>
+                    <td> @item.Estado</td>
+                </tr>
+
+            </tbody>
+        }
+    </table>
+
+</div>
