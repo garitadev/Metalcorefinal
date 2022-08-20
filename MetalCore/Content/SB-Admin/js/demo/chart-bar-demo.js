@@ -29,120 +29,122 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 
 $(document).ready(function () {
-    //Peticion API
-    $.ajax({
+    if ($("#myBarChart").length) {
+        //Peticion API
+        $.ajax({
 
-        type: "GET",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        url: "http://localhost:53082/Home/DataBarra",
-        error: function () {
-            alert("Ocurrio un error con la solicitud");
-        },
-        success: function (data) {
-            console.log(data);
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: "http://localhost:53082/Home/DataBarra",
+            error: function () {
+                alert("Ocurrio un error con la solicitud");
+            },
+            success: function (data) {
+                //console.log(data);
 
-            var arrayProductos = [];
-            var arrayCantidad = [];
-            var arrayMarcas = [];
+                var arrayProductos = [];
+                var arrayCantidad = [];
+                var arrayMarcas = [];
 
 
-            for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i < data.length; i++) {
 
-                arrayProductos.push(data[i].name)
-                arrayCantidad.push(data[i].y)
-                arrayMarcas.push(data[i].Marca)
+                    arrayProductos.push(data[i].name)
+                    arrayCantidad.push(data[i].y)
+                    arrayMarcas.push(data[i].Marca)
+
+                }
+
+
+                var ctx = document.getElementById("myBarChart");
+                var myBarChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: arrayProductos,
+
+                        datasets: [{
+                            label: "Cantidad",
+                            backgroundColor: "#4e73df",
+                            hoverBackgroundColor: "#2e59d9",
+                            borderColor: "#4e73df",
+                            data: arrayCantidad,
+
+                        }],
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        layout: {
+                            padding: {
+                                left: 10,
+                                right: 25,
+                                top: 25,
+                                bottom: 0
+                            }
+                        },
+                        scales: {
+                            xAxes: [{
+                                time: {
+                                    unit: 'day'
+                                },
+                                gridLines: {
+                                    display: false,
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    maxTicksLimit: 6
+                                },
+                                maxBarThickness: 25,
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    min: 0,
+                                    max: 300,
+                                    maxTicksLimit: 10,
+                                    padding: 10,
+                                    // Include a dollar sign in the ticks
+                                    callback: function (value, index, values) {
+                                        return number_format(value);
+                                    }
+                                },
+                                gridLines: {
+                                    color: "rgb(0, 0, 0)",
+                                    zeroLineColor: "rgb(234, 236, 244)",
+                                    drawBorder: false,
+                                    borderDash: [10],
+                                    zeroLineBorderDash: [2]
+                                }
+                            }],
+                        },
+                        legend: {
+                            display: false
+                        },
+                        tooltips: {
+                            titleMarginBottom: 10,
+                            titleFontColor: '#6e707e',
+                            titleFontSize: 14,
+                            backgroundColor: "rgb(255,255,255)",
+                            bodyFontColor: "#858796",
+                            borderColor: '#dddfeb',
+                            borderWidth: 1,
+                            xPadding: 15,
+                            yPadding: 15,
+                            displayColors: false,
+                            caretPadding: 10,
+                            callbacks: {
+                                label: function (tooltipItem, chart) {
+                                    var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                                    return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+                                }
+                            }
+                        },
+                    }
+                });
 
             }
 
+        })
 
-            var ctx = document.getElementById("myBarChart");
-            var myBarChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: arrayProductos,
-
-                    datasets: [{
-                        label: "Cantidad",
-                        backgroundColor: "#4e73df",
-                        hoverBackgroundColor: "#2e59d9",
-                        borderColor: "#4e73df",
-                        data: arrayCantidad,
-
-                    }],
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    layout: {
-                        padding: {
-                            left: 10,
-                            right: 25,
-                            top: 25,
-                            bottom: 0
-                        }
-                    },
-                    scales: {
-                        xAxes: [{
-                            time: {
-                                unit: 'day'
-                            },
-                            gridLines: {
-                                display: false,
-                                drawBorder: false
-                            },
-                            ticks: {
-                                maxTicksLimit: 6
-                            },
-                            maxBarThickness: 25,
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                min: 0,
-                                max: 300,
-                                maxTicksLimit: 10,
-                                padding: 10,
-                                // Include a dollar sign in the ticks
-                                callback: function (value, index, values) {
-                                    return number_format(value);
-                                }
-                            },
-                            gridLines: {
-                                color: "rgb(0, 0, 0)",
-                                zeroLineColor: "rgb(234, 236, 244)",
-                                drawBorder: false,
-                                borderDash: [10],
-                                zeroLineBorderDash: [2]
-                            }
-                        }],
-                    },
-                    legend: {
-                        display: false
-                    },
-                    tooltips: {
-                        titleMarginBottom: 10,
-                        titleFontColor: '#6e707e',
-                        titleFontSize: 14,
-                        backgroundColor: "rgb(255,255,255)",
-                        bodyFontColor: "#858796",
-                        borderColor: '#dddfeb',
-                        borderWidth: 1,
-                        xPadding: 15,
-                        yPadding: 15,
-                        displayColors: false,
-                        caretPadding: 10,
-                        callbacks: {
-                            label: function (tooltipItem, chart) {
-                                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                                return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
-                            }
-                        }
-                    },
-                }
-            });
-
-            GraficaBarra(data);
-        }
-
-    })
-
+    }
+    
 });

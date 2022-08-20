@@ -6,127 +6,137 @@ let formIn = document.querySelector("#formIn");
 let botonIn = document.querySelector("#botonIn");
 
 function Habilitar() {
+    if ($('#boton')) {
 
-    let desabilitar = false;
+        let desabilitar = false;
 
-    if (form.idRol.value == "") {
-        desabilitar = true;//cambia el valor
+        if (form.idRol.value == "") {
+            desabilitar = true;//cambia el valor
 
+        }
+        if (form.Nombre.value == "") {
+            desabilitar = true;//cambia el valor
+
+        }
+        if (form.Apelli.value == "") {
+            desabilitar = true;
+
+        }
+        if (form.email.value == "") {
+            desabilitar = true;
+
+        }
+        if (form.cedu.value == "") {
+            desabilitar = true;
+
+        }
+        if (form.pass.value == "") {
+            desabilitar = true;
+
+        }
+        if (desabilitar == true) {
+            boton.disabled = true;
+
+
+        }
+        else {
+            boton.disabled = false;
+
+
+        }
+        form.addEventListener("keyup", Habilitar) //evento para verificar que el usuario esta escribiendo
     }
-    if (form.Nombre.value == "") {
-        desabilitar = true;//cambia el valor
 
-    }
-    if (form.Apelli.value == "") {
-        desabilitar = true;
-
-    }
-    if (form.email.value == "") {
-        desabilitar = true;
-
-    }
-    if (form.cedu.value == "") {
-        desabilitar = true;
-
-    }
-    if (form.pass.value == "") {
-        desabilitar = true;
-
-    }
-    if (desabilitar == true) {
-        boton.disabled = true;
-       
-
-    }
-    else {
-        boton.disabled = false;
-       
-
-    }
-
+   
+   
 }
 
-form.addEventListener("keyup", Habilitar) //evento para verificar que el usuario esta escribiendo
+
 
 
 
 
 function HabilitarActua() {
+    if ($('#boton')) {
 
-    let desabilitar = false;
+        let desabilitar = false;
 
-    if (formA.idRol.value == "") {
-        desabilitar = true;
+        if (formA.idRol.value == "") {
+            desabilitar = true;
 
+        }
+        if (formA.Nombre.value == "") {
+            desabilitar = true;
+
+        }
+        if (formA.Apelli.value == "") {
+            desabilitar = true;
+
+        }
+        if (formA.email.value == "") {
+            desabilitar = true;
+
+        }
+        if (formA.idEstado.value == "") {
+            desabilitar = true;
+
+        }
+        if (desabilitar == true) {
+
+            botonActua.disabled = true;
+
+        }
+        else {
+
+            botonActua.disabled = false;
+
+        }
+        formA.addEventListener("keyup", HabilitarActua) //evento para verificar que el usuario esta escribiendo
     }
-    if (formA.Nombre.value == "") {
-        desabilitar = true;
-
-    }
-    if (formA.Apelli.value == "") {
-        desabilitar = true;
-
-    }
-    if (formA.email.value == "") {
-        desabilitar = true;
-
-    }
-    if (formA.idEstado.value == "") {
-        desabilitar = true;
-
-    }
-    if (desabilitar == true) {
-
-        botonActua.disabled = true;
-
-    }
-    else {
-
-        botonActua.disabled = false;
-
-    }
-    formA.addEventListener("keyup", HabilitarActua) //evento para verificar que el usuario esta escribiendo
+   
 
 
 }
 
 //inventario
 function HabilitarIn() {
+    if ($('#boton')) {
+        let desabilitar = false;
 
-    let desabilitar = false;
+        if (formIn.idPro.value == "") {
+            desabilitar = true;//cambia el valor
 
-    if (formIn.idPro.value == "") {
-        desabilitar = true;//cambia el valor
+        }
+        if (formIn.nombre.value == "") {
+            desabilitar = true;//cambia el valor
 
+        }
+        if (formIn.marca.value == "") {
+            desabilitar = true;
+
+        }
+        if (formIn.canti.value == "") {
+            desabilitar = true;
+
+        }
+        if (formIn.Preci.value == "") {
+            desabilitar = true;
+
+        }
+
+        if (desabilitar == true) {
+            botonIn.disabled = true;
+
+
+        }
+        else {
+            botonIn.disabled = false;
+
+
+        }
+        formIn.addEventListener("keyup", HabilitarIn) //evento para verificar que el usuario esta escribiendo
     }
-    if (formIn.nombre.value == "") {
-        desabilitar = true;//cambia el valor
-
-    }
-    if (formIn.marca.value == "") {
-        desabilitar = true;
-
-    }
-    if (formIn.canti.value == "") {
-        desabilitar = true;
-
-    }
-    if (formIn.Preci.value == "") {
-        desabilitar = true;
-
-    }
-   
-    if (desabilitar == true) {
-        botonIn.disabled = true;
-
-
-    }
-    else {
-        botonIn.disabled = false;
-
-
-    }
-    formIn.addEventListener("keyup", HabilitarIn) //evento para verificar que el usuario esta escribiendo
+    
 }
 
 

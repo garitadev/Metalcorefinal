@@ -1,20 +1,24 @@
 ﻿$(document).ready(function () {
-    //Peticion API
-    $.ajax({
+    if ($("#pie2").length) {
 
-        type: "GET",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        url: "http://localhost:53082/Home/DataPastel",
-        error: function () {
-            alert("Ocurrio un error con la solicitud");
-        },
-        success: function (data) {
-            console.log(data);
-            GraficaPastel(data);
-        }
+        //Peticion API
+        $.ajax({
 
-    })
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: "http://localhost:53082/Home/DataPastel",
+            error: function () {
+                alert("Ocurrio un error con la solicitud");
+            },
+            success: function (data) {
+                //console.log(data);
+                GraficaPastel(data);
+            }
+
+        })
+    }
+    
 
 
 });
