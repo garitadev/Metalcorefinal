@@ -141,5 +141,25 @@ namespace SB_Admin.Models
             }
         }
 
+        public ProductosObj ConsultaProductoMaterial(int idProducto)
+        {
+            try
+            {
+                InventarioBLL BLL = new InventarioBLL();
+                var consulta = BLL.ConsultaProductoMaterial(idProducto);
+
+                if (consulta != null)
+                {
+                    return consulta;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

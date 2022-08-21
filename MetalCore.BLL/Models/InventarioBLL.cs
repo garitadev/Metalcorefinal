@@ -55,5 +55,13 @@ namespace MetalCore.BLL.Models
             return (DAL.BorrarProductos(idProducto));
         }
 
+
+
+        //VALIDAR REGISTRO A ELIMINAR
+        public ProductosObj ConsultaProductoMaterial(int idProducto)
+        {
+            InventarioDAL DAL = new InventarioDAL();
+            return (DAL.ConsultarProductoMaterial(idProducto));
+        }
     }
 }

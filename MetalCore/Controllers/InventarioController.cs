@@ -16,13 +16,18 @@ namespace SB_Admin.Controllers
         // GET: Inventario
         // GET: Inventario
         [HttpGet]
-        public ActionResult Consultar()
+        public ActionResult Consultar(int? codigo)
         {
             UsuarioObj user = (UsuarioObj)Session["User"];
             var token = user.TokenJWT;
 
             try
             {
+
+                if (codigo!= null)
+                {
+                    ViewBag.codigo = codigo;
+                }
                 //verifica si la lista de actividades tiene datos o está vacía
                 if (Session["User"] != null)
                 {
@@ -133,6 +138,20 @@ namespace SB_Admin.Controllers
         public ActionResult EliminarProducto(int idProducto)
         {
             InventarioModel modelo = new InventarioModel();
+
+            //Consultar si el producto tiene trabajos
+            //->si tieena return view
+            if (modelo.ConsultaProductoMaterial(idProducto) != null)
+            {
+
+                //codigos 3 -> no se puede borrar
+                int codigo = 3;
+                ViewBag.codigo = codigo;
+                return RedirectToAction("Consultar", "Inventario", new {codigo = 3});
+
+            }
+
+
             if (modelo.EliminarProducto(idProducto))
             {
                 return RedirectToAction("Consultar", "Inventario");

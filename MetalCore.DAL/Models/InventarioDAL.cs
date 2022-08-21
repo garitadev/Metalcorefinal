@@ -113,6 +113,9 @@ namespace MetalCore.DAL.Models
                 }
             }
         }
+
+
+       
         public List<ProductosObj> ConsultarProductos()
         {
 
@@ -195,6 +198,7 @@ namespace MetalCore.DAL.Models
                 }
             }
         }
+        
         public ProductosObj BorrarProductos(int idProducto)
         {
             using (var context = new DD_METALCOREEntities())
@@ -263,6 +267,35 @@ namespace MetalCore.DAL.Models
                     //modeloBitacora.RegistrarError(error);
                     context.Dispose();
 
+                    throw ex;
+                }
+            }
+        }
+
+        public ProductosObj ConsultarProductoMaterial(int idProducto)
+        {
+            ProductosObj resultado = new ProductosObj();
+            using (var context = new DD_METALCOREEntities())
+            {
+                try
+                {
+                    var datos = (from x in context.MaterialesTrabajo
+                                 where x.idProducto == idProducto
+                                 select x).FirstOrDefault();
+
+                    if (datos != null)
+                    {
+                        return resultado;
+                    }
+
+                    context.Dispose();
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    var error = ex.ToString();
+                    // modeloBitacora.RegistrarError(error);
+                    context.Dispose();
                     throw ex;
                 }
             }
