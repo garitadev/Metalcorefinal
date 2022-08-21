@@ -102,7 +102,16 @@ namespace SB_Admin.Controllers
                         ViewBag.listaPermisos = user.listaPermisos;
                         ViewBag.MjsCrear = "Mensaje"; //envia un mensaje de que el usuario ya esta registrado
                         ViewBag.listaRoles = modelos.ConsultarRolesCombo(); //llama la consulta de los roles 
-                       
+
+                        ModelState.Clear();
+                        UsuarioObj obj = new UsuarioObj()
+                        {
+                            Nombre = string.Empty,
+                            Apellido = string.Empty,
+                            cedula = string.Empty,
+                          
+                        };
+
                         return View("Crear");
 
                     }
@@ -114,7 +123,16 @@ namespace SB_Admin.Controllers
                         modelos.RegistrarUsuario(usuario, token);
                         ViewBag.MjsCreado = "Mensaje";
                         ViewBag.listaRoles = modelos.ConsultarRolesCombo(); //llama la consulta de los roles 
-                      
+
+                        ModelState.Clear();
+                        UsuarioObj obj = new UsuarioObj()
+                        {
+                            Nombre = string.Empty,
+                            Apellido = string.Empty,
+                            cedula = string.Empty,
+
+                        };
+
                         return View("Crear");
                     }
 
