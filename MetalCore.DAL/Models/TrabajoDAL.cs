@@ -390,28 +390,28 @@ namespace MetalCore.DAL.Models
             }
         }
 
-
         //validar que no haya material con trabajo relacionado
         public bool VerifiExisTrabajo(int idTrabajo)
         {
             MaterialesOBJ usuario = new MaterialesOBJ();
-            using (var contex = new DD_METALCOREEntities())
+            using (var context = new DD_METALCOREEntities())
             {
                 try
                 {
-                    var respuesta = (from x in contex.MaterialesTrabajo
+                    var resultado = (from x in context.MaterialesTrabajo
                                      where x.idTrabajo == idTrabajo
                                      select x).FirstOrDefault();
 
-                    if (respuesta != null)
+                    if (resultado != null)
                     {
-                        return false;
-
+                        context.MaterialesTrabajo.Remove(resultado);
+                        context.SaveChanges();
+                        return true;
                     }
                     else
                     {
-                        contex.Dispose();
-                        return true;
+                        context.Dispose();
+                        return false;
 
                     }
 
@@ -419,12 +419,13 @@ namespace MetalCore.DAL.Models
                 catch (Exception ex)
                 {
 
-                    contex.Dispose();
+                    context.Dispose();
                     throw ex;
                 }
             }
 
         }
+
 
         public List<TrabajoObj> ConsultarTrabajos()
         {

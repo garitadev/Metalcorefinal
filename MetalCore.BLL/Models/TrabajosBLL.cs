@@ -206,6 +206,7 @@ namespace MetalCore.BLL.Models
             return (DAL.BorrarMaterial(idMaterial));
         }
 
+
         public bool VerifiExisTrabajo(int idTrabajo)
         {
             TrabajoDAL DAL = new TrabajoDAL();

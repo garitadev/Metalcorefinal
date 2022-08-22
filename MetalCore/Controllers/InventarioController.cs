@@ -138,7 +138,7 @@ namespace SB_Admin.Controllers
         public ActionResult EliminarProducto(int idProducto)
         {
             InventarioModel modelo = new InventarioModel();
-
+            ProveedoresModel modelos = new ProveedoresModel();
             //Consultar si el producto tiene trabajos
             //->si tieena return view
             if (modelo.ConsultaProductoMaterial(idProducto) != null)

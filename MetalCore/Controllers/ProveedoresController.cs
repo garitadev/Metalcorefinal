@@ -153,7 +153,25 @@ namespace SB_Admin.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult BorrarProve(int idProve)
+        {
+            ProveedoresModel modelo = new ProveedoresModel();
+            if (modelo.BorrarProve(idProve))
+            {
+                ViewBag.MjsElim = "Mensaje";
+                return RedirectToAction("Consultar", "Proveedores");
 
+            }
+            else
+            {
+                LogModel.LogError("Modulo: Trabajo. Mensaje: Error al Eliminar proveedor: ");
+
+                return View("../Shared/Error");
+
+            }
+
+        }
 
 
     }

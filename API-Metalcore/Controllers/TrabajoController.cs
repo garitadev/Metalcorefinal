@@ -371,7 +371,7 @@ namespace API_Metalcore.Controllers
         }
 
         [HttpGet]
-        [Route("api/BorrarMaterial")]
+        [Route("api/BorrarTrabajo")]
         public IHttpActionResult BorrarMaterial(int idMaterial)
         {
             try

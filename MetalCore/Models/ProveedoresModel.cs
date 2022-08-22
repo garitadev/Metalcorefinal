@@ -89,5 +89,20 @@ namespace SB_Admin.Models
                 throw ex;
             }
         }
+
+        public bool BorrarProve(int idProve)
+        {
+            try
+            {
+                ProveedoresBLL BLL = new ProveedoresBLL();
+                BLL.BorrarProve(idProve);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

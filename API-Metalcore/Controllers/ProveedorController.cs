@@ -90,6 +90,26 @@ namespace API_Metalcore.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("api/BorrarProve")]
+        public IHttpActionResult BorrarProve(int idProve)
+        {
+            ProveedoresModel model = new ProveedoresModel();
+            try
+            {
+                if (model.BorrarProve(idProve))
+                {
+                    return Ok();
+
+                }
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
 
