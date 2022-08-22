@@ -43,5 +43,12 @@ namespace MetalCore.BLL.Models
             ProveedoresDAL DAL = new ProveedoresDAL();
             return (DAL.ActualizarProveedores(proveedor));
         }
+
+        public bool BorrarProve(int idProve)
+        {
+            ProveedoresDAL DAL = new ProveedoresDAL();
+            return (DAL.BorrarProve(idProve));
+
+        }
     }
 }

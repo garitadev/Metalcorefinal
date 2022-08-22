@@ -172,6 +172,43 @@ namespace MetalCore.DAL.Models
                 }
             }
         }
+        public bool BorrarProve(int idProveedor)
+        {
+
+            ProductosObj provee = new ProductosObj();
+            using (var context = new DD_METALCOREEntities())
+            {
+                try
+                {
+                    var resultado = (from x in context.Proveedor
+                                     where x.idProveedor == idProveedor
+                                     select x).FirstOrDefault();
+
+                    if (resultado != null)
+                    {
+                        context.Proveedor.Remove(resultado);
+                        context.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        context.Dispose();
+                        return false;
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    context.Dispose();
+                    throw ex;
+                }
+            }
+
+        }
+
+      
 
     }
 }

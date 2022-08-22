@@ -546,7 +546,8 @@ namespace SB_Admin.Controllers
 
                 TrabajoModel CosultaTrabajos = new TrabajoModel();
                 ViewBag.listaPermisos = user.listaPermisos;
-                ViewBag.MjsCrear = "Mensaje";
+                CosultaTrabajos.BorrarTrabajo(idTrabajo);
+                ViewBag.MjsElim = "Mensaje";
                 return RedirectToAction("Consultar", "Trabajo");
 
             }
@@ -554,32 +555,14 @@ namespace SB_Admin.Controllers
             {
                 TrabajoModel modelos = new TrabajoModel();
                 modelos.BorrarTrabajo(idTrabajo);
-                ViewBag.MjsCreado = "Mensaje";
+                ViewBag.MjsElim = "Mensaje";
                 return RedirectToAction("Consultar", "Trabajo");
             }
 
 
         }
 
-        [HttpPost]
-        public ActionResult BorrarMaterial(int idMaterial)
-        {
-            TrabajoModel modelo = new TrabajoModel();
-            if (modelo.BorrarMaterial(idMaterial))
-            {
-                ViewBag.MjsElim = "Mensaje";
-                return RedirectToAction("ConsultarAsigMateri", "Trabajo");
-
-            }
-            else
-            {
-                LogModel.LogError("Modulo: Trabajo. Mensaje: Error al Eliminar Material: ");
-
-                return View("../Shared/Error");
-
-            }
-
-        }
+ 
         public ActionResult ConsultarMaterialesXTrabajo(int idTrabajo)
         {
             if (Session["User"] != null)
