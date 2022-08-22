@@ -19,7 +19,7 @@ namespace SB_Admin.Controllers
         public ActionResult Consultar(int? codigo)
         {
             UsuarioObj user = (UsuarioObj)Session["User"];
-            var token = user.TokenJWT;
+            //var token = user.TokenJWT;
 
             try
             {
@@ -32,7 +32,7 @@ namespace SB_Admin.Controllers
                 if (Session["User"] != null)
                 {
                     InventarioModel model = new InventarioModel();
-                    var respuesta = model.ConsultarTodosProductos(token);
+                    var respuesta = model.ConsultarTodosProductos();
                     ViewBag.listaPermisos = user.listaPermisos;
                     ViewBag.rol = user.idRol;
 

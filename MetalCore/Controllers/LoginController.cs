@@ -5,6 +5,8 @@ using SB_Admin.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -18,12 +20,31 @@ namespace SB_Admin.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public JsonResult AjaxEmail(string email)
+        {
+            UsuarioModel modelo = new UsuarioModel();
+            UsuarioObj usuario = new UsuarioObj();
+            usuario.email = email;
+
+            if (modelo.ValidarExistenciaEmailUser(usuario) != null)
+            {
+                var respuesta = modelo.CantidadIntentos(usuario);
+
+                if (respuesta == 3)
+                {
+                    return Json("El email ingresado no coincide con nuestro registros");
+                    
+                }
+            }
+            
+            return (null);
+        }
 
         [HttpPost]
         public ActionResult Index()
         {
             return RedirectToAction("Dashboard", "Home");
-
 
         }
 
@@ -33,9 +54,22 @@ namespace SB_Admin.Controllers
         {
             string email = usuario.email;
             string clave = usuario.password;
+            string claveEncriptada = GetSha256(clave);
+
             UsuarioModel modelo = new UsuarioModel();
             var respuesta = modelo.ValidarCrenciales(usuario);
 
+            var validarEmail = modelo.ValidarExistenciaEmailUser(usuario);
+            
+            if (validarEmail != null && modelo.CantidadIntentos(usuario).Equals(3))
+            {
+                ViewBag.propiedad = "disabled";
+            }
+            if (validarEmail != null &&  validarEmail.password != claveEncriptada)
+            {
+                int intentos = modelo.CantidadIntentosIncremt(usuario);
+                
+            }
 
             if (!captchaValid)
             {
@@ -82,7 +116,7 @@ namespace SB_Admin.Controllers
 
             }
             //Se valida que el correo ingreado exista en los registros de la bd
-            if (usuarioModel.ValidarExistenciaEmail(modelo))
+            if (usuarioModel.ValidarExistenciaEmail(modelo)!=null)
             {
                 usuarioModel.GenerarTokenPassword(modelo);
             }
@@ -127,6 +161,17 @@ namespace SB_Admin.Controllers
             }
 
             return View(model);
+        }
+
+        private string GetSha256(string str)
+        {
+            SHA256 sha256 = SHA256Managed.Create();
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            byte[] stream = null;
+            StringBuilder sb = new StringBuilder();
+            stream = sha256.ComputeHash(encoding.GetBytes(str));
+            for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
+            return sb.ToString();
         }
     }
 }

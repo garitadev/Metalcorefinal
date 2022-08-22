@@ -24,6 +24,42 @@ namespace MetalCore.BLL.Models
 
         }
 
+        public int CantidadIntentos(UsuarioObj obj)
+        {
+            UsuarioDAL DAL = new UsuarioDAL();
+            var respuesta = DAL.CantidadIntentos(obj);
+            return (respuesta);
+
+
+        }
+
+        public int CantidadIntentosIncrt(UsuarioObj obj)
+        {
+            UsuarioDAL DAL = new UsuarioDAL();
+            var respuesta = DAL.CantidadIntentosIncremt(obj);
+            return (respuesta);
+
+
+        }
+
+        public int CantidadIntentosIncremt(UsuarioObj obj)
+        {
+            UsuarioDAL DAL = new UsuarioDAL();
+            var respuesta = DAL.CantidadIntentosIncremt(obj);
+            return (respuesta);
+
+
+        }
+
+        public UsuarioObj ValidarEmail(UsuarioObj obj)
+        {
+            UsuarioDAL DAL = new UsuarioDAL();
+            var respuesta = DAL.ValidarEmail(obj);
+            return (respuesta);
+
+
+        }
+
         //verificar la existencia del usuario
         public bool VerifiExistencia(string Email, string Cedula)
         {
@@ -92,7 +128,7 @@ namespace MetalCore.BLL.Models
 
         }
 
-        public bool ValidarExistenciaEmail(string email)
+        public UsuarioObj ValidarExistenciaEmail(string email)
         {
             UsuarioDAL DAL = new UsuarioDAL();
             return (DAL.ValidarExistenciaEmail(email));

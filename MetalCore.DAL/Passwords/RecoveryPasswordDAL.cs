@@ -69,7 +69,7 @@ namespace MetalCore.DAL.Passwords
                     {
                         respuesta.password = obj.Password;
                         respuesta.token_recovery = null;
-
+                        respuesta.intentosPermitidos = 0;
                         contex.SaveChanges();
 
 

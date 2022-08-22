@@ -27,6 +27,33 @@ namespace SB_Admin.Models
             return (respuesta);
         }
 
+        public UsuarioObj ValidarEmail(UsuarioObj usuario)
+        {
+            UsuarioBLL BLL = new UsuarioBLL();
+            var respuesta = BLL.ValidarCredenciales(usuario);
+            return (respuesta);
+        }
+        public int CantidadIntentosIncrt(UsuarioObj usuario)
+        {
+            UsuarioBLL BLL = new UsuarioBLL();
+            var respuesta = BLL.CantidadIntentosIncrt(usuario);
+            return (respuesta);
+        }
+        public int CantidadIntentos(UsuarioObj usuario)
+        {
+            UsuarioBLL BLL = new UsuarioBLL();
+            var respuesta = BLL.CantidadIntentos(usuario);
+            return (respuesta);
+        }
+
+        public int CantidadIntentosIncremt(UsuarioObj usuario)
+        {
+            UsuarioBLL BLL = new UsuarioBLL();
+            var respuesta = BLL.CantidadIntentosIncremt(usuario);
+            return (respuesta);
+        }
+
+
         //verifica la existencia del usuario
         public bool VerifiExistencia(string Email, string Cedula)
         {
@@ -134,8 +161,20 @@ namespace SB_Admin.Models
                 throw ex;
             }
         }
+        public UsuarioObj ValidarExistenciaEmailUser(UsuarioObj obj)
+        {
+            try
+            {
+                UsuarioBLL BLL = new UsuarioBLL();
 
-        public bool ValidarExistenciaEmail(RecoveryPassword obj)
+                return (BLL.ValidarExistenciaEmail(obj.email));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public UsuarioObj ValidarExistenciaEmail(RecoveryPassword obj)
         {
             try
             {

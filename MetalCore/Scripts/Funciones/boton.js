@@ -170,3 +170,39 @@ function EncontrarPrecio() {
         }
     });
 }
+
+
+function VerificarEmailUser() {
+
+    let txtEmail = $("#email").val();
+
+
+    $.ajax({
+        type: "get",
+        url: '/Login/AjaxEmail',
+        data: {
+            email: txtEmail,
+        },
+        dateType: 'json',
+        success: function (response) {
+            $("#btnLogin").prop('disabled', false);
+
+
+            $("#btnLogin").addClass("btn-primary");
+            $("#btnLogin").removeClass("btn-secondary");
+            //$("#lblError").text("");
+
+
+
+        },
+        error: function (response) {
+            $("#btnLogin").addClass("btn-secondary");
+            $("#btnLogin").prop('disabled', true);
+
+            //$("#lblError").empty();
+
+            $("#lblError").append("Usuario bloquedo, por favor restablezca su contraseña");
+
+        }
+    });
+}

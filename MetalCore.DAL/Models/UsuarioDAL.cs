@@ -28,6 +28,7 @@ namespace MetalCore.DAL.Models
                     //Asigna los permisos correspondientes al usuario logueado
                     if (respuesta != null)
                     {
+                        
                         var permisos = (from x in contex.Rol_Operacion
                                         where x.idRol == respuesta.idRol
                                         select x).ToList();
@@ -66,6 +67,79 @@ namespace MetalCore.DAL.Models
             }
 
         }
+
+        //Cantidad intentos
+        public int CantidadIntentos(UsuarioObj obj)
+        {
+            //accion 1-> consulta 2->intengo
+
+
+            using (var contex = new DD_METALCOREEntities())
+            {
+                try
+                {
+                    var respuesta = (from x in contex.Empleado
+                                     where x.email == obj.email 
+                                     select x).FirstOrDefault();
+
+                    int canitdadIntentos = (int)respuesta.intentosPermitidos;
+
+                    
+                    return canitdadIntentos;
+                   
+                }
+                catch (Exception ex)
+                {
+                    var error = ex.ToString();
+                    // modeloBitacora.RegistrarError(error);
+                    contex.Dispose();
+                    throw ex;
+                }
+            }
+
+        }
+
+
+        public int CantidadIntentosIncremt(UsuarioObj obj)
+        {
+            //accion 1-> consulta 2->intengo
+
+
+            using (var contex = new DD_METALCOREEntities())
+            {
+                try
+                {
+                    var respuesta = (from x in contex.Empleado
+                                     where x.email == obj.email
+                                     select x).FirstOrDefault();
+
+                    int canitdadIntentos = (int)respuesta.intentosPermitidos;
+
+                   
+                    if (canitdadIntentos < 3)
+                    {
+                        canitdadIntentos += 1;
+
+                        respuesta.intentosPermitidos = canitdadIntentos;
+                        contex.SaveChanges();
+                    }
+                    
+
+
+                    return canitdadIntentos;
+
+                }
+                catch (Exception ex)
+                {
+                    var error = ex.ToString();
+                    // modeloBitacora.RegistrarError(error);
+                    contex.Dispose();
+                    throw ex;
+                }
+            }
+
+        }
+
         //Procedimientos para la creacion del CRUD del empleado/Usuario
 
 
@@ -104,6 +178,53 @@ namespace MetalCore.DAL.Models
             }
 
         }
+
+        public UsuarioObj ValidarEmail(UsuarioObj obj)
+        {
+            UsuarioObj usuario = new UsuarioObj();
+
+
+            using (var contex = new DD_METALCOREEntities())
+            {
+                try
+                {
+                    var respuesta = (from x in contex.Empleado
+                                     where x.email == obj.email
+                                     select x).FirstOrDefault();
+
+
+                    //Asigna los permisos correspondientes al usuario logueado
+                    if (respuesta != null)
+                    {
+                        
+                        usuario.Nombre = respuesta.nombre;
+                        usuario.Apellido = respuesta.apellido;
+                        usuario.email = respuesta.email;
+                        usuario.cedula = respuesta.cedula;
+                        usuario.idRol = respuesta.idRol;
+                        usuario.idUsuario = respuesta.idUsuario;
+
+
+
+
+                        return usuario;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var error = ex.ToString();
+                    // modeloBitacora.RegistrarError(error);
+                    contex.Dispose();
+                    throw ex;
+                }
+            }
+
+        }
+
 
         //consulta combobox roles
         public List<SelectListItem> ConsultarRolesCombo()
@@ -255,8 +376,10 @@ namespace MetalCore.DAL.Models
             }
         }
 
-        public bool ValidarExistenciaEmail(string email)
+        public UsuarioObj ValidarExistenciaEmail(string email)
         {
+            UsuarioObj usuario = new UsuarioObj();
+
             using (var context = new DD_METALCOREEntities())
             {
                 try
@@ -267,10 +390,17 @@ namespace MetalCore.DAL.Models
 
                     if (datos != null)
                     {
-                        return true;
+                        usuario.Nombre = datos.nombre;
+                        usuario.Apellido = datos.apellido;
+                        usuario.email = datos.email;
+                        usuario.cedula = datos.cedula;
+                        usuario.idRol = datos.idRol;
+                        usuario.idUsuario = datos.idUsuario;
+                        usuario.password = datos.password;
+                        return (usuario);
                     }
 
-                    return false;
+                    return null;
                 }
                 catch (Exception ex)
                 {

@@ -76,7 +76,7 @@ namespace SB_Admin.Controllers
         public ActionResult Consultar()
         {
             UsuarioObj user = (UsuarioObj)Session["User"];
-            var token = user.TokenJWT;
+           // var token = user.TokenJWT;
             try
             {
                 if (Session["User"] != null)
