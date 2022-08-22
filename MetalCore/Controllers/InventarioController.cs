@@ -19,12 +19,12 @@ namespace SB_Admin.Controllers
         public ActionResult Consultar(int? codigo)
         {
             UsuarioObj user = (UsuarioObj)Session["User"];
-            //var token = user.TokenJWT;
+            var token = user.TokenJWT;
 
             try
             {
 
-                if (codigo!= null)
+                if (codigo != null)
                 {
                     ViewBag.codigo = codigo;
                 }
@@ -32,7 +32,7 @@ namespace SB_Admin.Controllers
                 if (Session["User"] != null)
                 {
                     InventarioModel model = new InventarioModel();
-                    var respuesta = model.ConsultarTodosProductos();
+                    var respuesta = model.ConsultarTodosProductos(token);
                     ViewBag.listaPermisos = user.listaPermisos;
                     ViewBag.rol = user.idRol;
 
@@ -138,19 +138,6 @@ namespace SB_Admin.Controllers
         public ActionResult EliminarProducto(int idProducto)
         {
             InventarioModel modelo = new InventarioModel();
-            ProveedoresModel modelos = new ProveedoresModel();
-            //Consultar si el producto tiene trabajos
-            //->si tieena return view
-            if (modelo.ConsultaProductoMaterial(idProducto) != null)
-            {
-
-                //codigos 3 -> no se puede borrar
-                int codigo = 3;
-                ViewBag.codigo = codigo;
-                return RedirectToAction("Consultar", "Inventario", new {codigo = 3});
-
-            }
-
 
             if (modelo.EliminarProducto(idProducto))
             {
@@ -179,7 +166,7 @@ namespace SB_Admin.Controllers
                 if (Session["User"] != null)
                 {
                     var comboProveedores = proveedores.ConsultarTodosProveedoresCombo();
-                    
+
                     ViewBag.listaPermisos = user.listaPermisos;
                     ViewBag.listaProveedores = comboProveedores;
                     //almacena un producto en el inventario

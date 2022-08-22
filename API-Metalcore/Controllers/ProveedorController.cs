@@ -98,12 +98,8 @@ namespace API_Metalcore.Controllers
             ProveedoresModel model = new ProveedoresModel();
             try
             {
-                if (model.BorrarProve(idProve))
-                {
-                    return Ok();
-
-                }
-                return BadRequest();
+                model.BorrarProve(idProve);
+                return Ok();
             }
             catch (Exception ex)
             {

@@ -160,7 +160,7 @@ namespace MetalCore.DAL.Models
                                  where x.idTrabajo == idTrabajo
                                  select x).FirstOrDefault();
 
-                    
+
                     resultado.IdTrabajo = datos.idTrabajo;
                     resultado.IdUsuario = datos.idUsuario.Value;
                     resultado.IdEstadoTrabajo = datos.idEstadoTrabajo.Value;
@@ -489,17 +489,22 @@ namespace MetalCore.DAL.Models
 
                     foreach (var item in datos)
                     {
+
                         var nombreTrabajo = (from x in contex.Trabajo where x.idTrabajo == item.idTrabajo select x).FirstOrDefault();
                         var produ = (from x in contex.Productos where x.idProducto == item.idProducto select x).FirstOrDefault();
-                        listaMateriales.Add(new MaterialesOBJ
+                        if (produ.idEstado == 1)
                         {
-                            IdMaterial = item.idMaterial,
-                            Fecha = nombreTrabajo.fecha.Value,
-                            NombreUsuario = nombreTrabajo.nombreCliente,
-                            NombrePro = produ.nombre.ToString(),
-                            Cantidad = item.cantidad.Value,
-                            Precio = item.precio.Value,
-                        });
+                            listaMateriales.Add(new MaterialesOBJ
+                            {
+                                IdMaterial = item.idMaterial,
+                                Fecha = nombreTrabajo.fecha.Value,
+                                NombreUsuario = nombreTrabajo.nombreCliente,
+                                NombrePro = produ.nombre.ToString(),
+                                Cantidad = item.cantidad.Value,
+                                Precio = item.precio.Value,
+                            });
+                        }
+
 
                     }
                     contex.Dispose();
@@ -798,6 +803,7 @@ namespace MetalCore.DAL.Models
                 try
                 {
                     var datos = (from x in context.Productos
+                                 where x.idEstado == 1
                                  select x).ToList();
 
                     resultado.Add(new SelectListItem
@@ -885,7 +891,7 @@ namespace MetalCore.DAL.Models
                                  where x.idUsuario == idUsuario
                                  select x).FirstOrDefault();
 
-                    if (datos !=null)
+                    if (datos != null)
                     {
                         resultado.Nombre = datos.nombre;
                         resultado.email = datos.email;
@@ -922,15 +928,19 @@ namespace MetalCore.DAL.Models
                     foreach (var item in datos)
                     {
                         var nombreProducto = (from x in contex.Productos where x.idProducto == item.idProducto select x).FirstOrDefault();
-                        listaMaterialesXTrabajo.Add(new MaterialesOBJ
+                        if (nombreProducto.idEstado == 1 && item.idTrabajo == idTrabajo)
                         {
-                            IdTrabajo = (int)item.idTrabajo,
-                            IdProducto = (int)item.idProducto,
-                            NombreProducto = nombreProducto.nombre.ToString(),
-                            Cantidad = (int)item.cantidad
-                        });
+                            listaMaterialesXTrabajo.Add(new MaterialesOBJ
+                            {
+                                IdTrabajo = (int)item.idTrabajo,
+                                IdProducto = (int)item.idProducto,
+                                NombreProducto = nombreProducto.nombre.ToString(),
+                                Cantidad = (int)item.cantidad
+                            });
+                        }
 
                     }
+
                     contex.Dispose();
                     return listaMaterialesXTrabajo;
                 }

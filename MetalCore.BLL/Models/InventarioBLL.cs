@@ -20,7 +20,7 @@ namespace MetalCore.BLL.Models
 
         public List<ProductosObj> ConsultarProductos()
         {
-            InventarioDAL DAL= new InventarioDAL();
+            InventarioDAL DAL = new InventarioDAL();
             return (DAL.ConsultarProductos());
         }
 
@@ -54,7 +54,6 @@ namespace MetalCore.BLL.Models
             InventarioDAL DAL = new InventarioDAL();
             return (DAL.BorrarProductos(idProducto));
         }
-
 
 
         //VALIDAR REGISTRO A ELIMINAR

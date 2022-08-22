@@ -62,7 +62,7 @@ namespace MetalCore.DAL.Models
                     obj.marca = producto.MARCA;
                     obj.cantidad = producto.CANTIDAD;
                     obj.precio = producto.PRECIO;
-
+                    obj.idEstado = 1;
                     context.Productos.Add(obj);
                     context.SaveChanges();
                     return producto;
@@ -115,7 +115,7 @@ namespace MetalCore.DAL.Models
         }
 
 
-       
+
         public List<ProductosObj> ConsultarProductos()
         {
 
@@ -132,16 +132,21 @@ namespace MetalCore.DAL.Models
                         var nombreProveedor = (from x in context.Proveedor
                                                where x.idProveedor == item.idProveedor
                                                select x).FirstOrDefault();
-                        resultado.Add(new ProductosObj
+                        if (item.idEstado == 1)
                         {
-                            IDPRODUCTO = item.idProducto,
-                            IDPROVEEDOR = item.idProveedor,
-                            NOMBRE = item.nombre,
-                            MARCA = item.marca,
-                            CANTIDAD = (int)item.cantidad,
-                            PRECIO = item.precio,
-                            PROVEEDOR = nombreProveedor.nombre.ToString(),
-                        });
+                            resultado.Add(new ProductosObj
+                            {
+                                IDPRODUCTO = item.idProducto,
+                                IDPROVEEDOR = item.idProveedor,
+                                NOMBRE = item.nombre,
+                                MARCA = item.marca,
+                                CANTIDAD = (int)item.cantidad,
+                                PRECIO = item.precio,
+                                PROVEEDOR = nombreProveedor.nombre.ToString(),
+                            });
+
+                        }
+
 
                     }
 
@@ -176,7 +181,7 @@ namespace MetalCore.DAL.Models
                         resultado.marca = producto.MARCA;
                         resultado.cantidad = producto.CANTIDAD;
                         resultado.precio = producto.PRECIO;
-
+                        resultado.idEstado = 1;
 
                         context.SaveChanges();
                         return producto;
@@ -198,9 +203,10 @@ namespace MetalCore.DAL.Models
                 }
             }
         }
-        
+
         public ProductosObj BorrarProductos(int idProducto)
         {
+            ProductosObj producto = new ProductosObj();
             using (var context = new DD_METALCOREEntities())
             {
                 try
@@ -211,10 +217,10 @@ namespace MetalCore.DAL.Models
 
                     if (resultado != null)
                     {
-                        context.Productos.Remove(resultado);
+                        resultado.idEstado = 2;
                         context.SaveChanges();
 
-                        return new ProductosObj();
+                        return producto;
                     }
                     return null;
                 }

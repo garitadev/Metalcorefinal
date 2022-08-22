@@ -48,7 +48,7 @@ namespace SB_Admin.Models
         }
 
 
-        public List<ProductosObj> ConsultarTodosProductos()
+        public List<ProductosObj> ConsultarTodosProductos(string token)
         {
             try
             {

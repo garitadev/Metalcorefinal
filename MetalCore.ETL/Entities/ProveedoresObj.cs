@@ -18,7 +18,8 @@ namespace MetalCore.ETL.Entities
 
         public string email { get; set; }
 
-
+        public int idEstado { get; set; }
+        public string desEstado { get; set; }
 
 
     }

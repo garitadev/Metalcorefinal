@@ -15,5 +15,7 @@ namespace MetalCore.ETL.Entities
         public string MARCA { get; set; }
         public int CANTIDAD { get; set; }
         public string PRECIO { get; set; }
+        public int idEstado { get; set; }
+        public string desEstado { get; set; }
     }
 }

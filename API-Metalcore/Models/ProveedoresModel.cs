@@ -40,7 +40,7 @@ namespace API_Metalcore.Models
             return (BLL.ActualizarProveedores(proveedor));
         }
 
-        public bool BorrarProve(int idProve)
+        public ProveedoresObj BorrarProve(int idProve)
         {
             ProveedoresBLL BLL = new ProveedoresBLL();
             return (BLL.BorrarProve(idProve));

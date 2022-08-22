@@ -22,6 +22,7 @@ namespace MetalCore.DAL.Models
                     obj.direccion = proveedores.direccion;
                     obj.telefono = proveedores.telefono;
                     obj.email = proveedores.email;
+                    obj.idEstado = 1;
                     context.Proveedor.Add(obj);
                     context.SaveChanges();
                     context.Dispose();
@@ -50,14 +51,18 @@ namespace MetalCore.DAL.Models
                                  select x).ToList();
                     foreach (var item in datos)
                     {
-                        resultado.Add(new ProveedoresObj
+                        if (item.idEstado == 1)
                         {
-                            idProveedor = item.idProveedor,
-                            nombre = item.nombre,
-                            direccion = item.direccion,
-                            telefono = item.telefono,
-                            email = item.email
-                        });
+                            resultado.Add(new ProveedoresObj
+                            {
+
+                                idProveedor = item.idProveedor,
+                                nombre = item.nombre,
+                                direccion = item.direccion,
+                                telefono = item.telefono,
+                                email = item.email
+                            });
+                        }
                     }
                     context.Dispose();
                     return resultado;
@@ -89,12 +94,15 @@ namespace MetalCore.DAL.Models
 
                     foreach (var item in datos)
                     {
-                        resultado.Add(new SelectListItem
+                        if (item.idEstado == 1)
                         {
-                            Value = item.idProveedor.ToString(),
-                            Text = item.nombre
+                            resultado.Add(new SelectListItem
+                            {
+                                Value = item.idProveedor.ToString(),
+                                Text = item.nombre
 
-                        });
+                            });
+                        }
                     }
                     context.Dispose();
                     return resultado;
@@ -155,7 +163,7 @@ namespace MetalCore.DAL.Models
                         resultado.direccion = proveedor.direccion;
                         resultado.telefono = proveedor.telefono;
                         resultado.email = proveedor.email;
-
+                        resultado.idEstado = 1;
                         context.SaveChanges();
                         return proveedor;
                     }
@@ -172,10 +180,9 @@ namespace MetalCore.DAL.Models
                 }
             }
         }
-        public bool BorrarProve(int idProveedor)
+        public ProveedoresObj BorrarProve(int idProveedor)
         {
-
-            ProductosObj provee = new ProductosObj();
+            ProveedoresObj producto = new ProveedoresObj();
             using (var context = new DD_METALCOREEntities())
             {
                 try
@@ -186,29 +193,26 @@ namespace MetalCore.DAL.Models
 
                     if (resultado != null)
                     {
-                        context.Proveedor.Remove(resultado);
+                        resultado.idEstado = 2;
                         context.SaveChanges();
-                        return true;
-                    }
-                    else
-                    {
-                        context.Dispose();
-                        return false;
 
+                        return producto;
                     }
-
+                    return null;
                 }
                 catch (Exception ex)
                 {
-
-                    context.Dispose();
+                    var error = ex.ToString();
+                    //modeloBitacora.RegistrarError(error);
                     throw ex;
                 }
+                finally
+                {
+                    context.Dispose();
+                }
             }
-
         }
 
-      
 
     }
 }

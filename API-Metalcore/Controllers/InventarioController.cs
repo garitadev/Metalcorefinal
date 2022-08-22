@@ -46,7 +46,7 @@ namespace API_Metalcore.Controllers
             }
         }
 
-        
+
 
         [HttpGet]
         [Route("api/ConsultarInventarioCB")]
@@ -131,7 +131,7 @@ namespace API_Metalcore.Controllers
             }
         }
 
-        
+
     }
 }
 

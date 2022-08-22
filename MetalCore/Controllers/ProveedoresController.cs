@@ -154,10 +154,11 @@ namespace SB_Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult BorrarProve(int idProve)
+        public ActionResult BorrarProve(int idProveedor)
         {
+
             ProveedoresModel modelo = new ProveedoresModel();
-            if (modelo.BorrarProve(idProve))
+            if (modelo.BorrarProve(idProveedor))
             {
                 ViewBag.MjsElim = "Mensaje";
                 return RedirectToAction("Consultar", "Proveedores");
