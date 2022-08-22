@@ -13,6 +13,7 @@
     <EntitySetMapping Name="Empleado">
       <EntityTypeMapping TypeName="DD_METALCOREModel.Empleado">
         <MappingFragment StoreEntitySet="Empleado">
+          <ScalarProperty Name="intentosPermitidos" ColumnName="intentosPermitidos" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
           <ScalarProperty Name="idRol" ColumnName="idRol" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -72,6 +73,7 @@
     <EntitySetMapping Name="Productos">
       <EntityTypeMapping TypeName="DD_METALCOREModel.Productos">
         <MappingFragment StoreEntitySet="Productos">
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
           <ScalarProperty Name="idProducto" ColumnName="idProducto" />
           <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -85,6 +87,7 @@
     <EntitySetMapping Name="Proveedor">
       <EntityTypeMapping TypeName="DD_METALCOREModel.Proveedor">
         <MappingFragment StoreEntitySet="Proveedor">
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
           <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="direccion" ColumnName="direccion" />

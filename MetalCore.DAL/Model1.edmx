@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DD_METALCOREModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DD_METALCOREModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bitacora">
           <Key>
             <PropertyRef Name="idRegistro" />
@@ -26,6 +26,7 @@
           <Property Name="password" Type="varchar" MaxLength="200" />
           <Property Name="token_recovery" Type="varchar" MaxLength="200" />
           <Property Name="idEstado" Type="int" />
+          <Property Name="intentosPermitidos" Type="int" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -90,6 +91,7 @@ advertencia 6002: La tabla o vista 'DD_METALCORE.dbo.Historico' no tiene definid
           <Property Name="cantidad" Type="int" />
           <Property Name="precio" Type="varchar" MaxLength="50" />
           <Property Name="idCuenta" Type="int" />
+          <Property Name="idEstado" Type="int" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -100,6 +102,7 @@ advertencia 6002: La tabla o vista 'DD_METALCORE.dbo.Historico' no tiene definid
           <Property Name="direccion" Type="varchar" MaxLength="50" />
           <Property Name="telefono" Type="varchar" MaxLength="50" />
           <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="idEstado" Type="int" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -123,7 +126,7 @@ advertencia 6002: La tabla o vista 'DD_METALCORE.dbo.Historico' no tiene definid
           <Property Name="idTrabajo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idUsuario" Type="int" />
           <Property Name="idEstadoTrabajo" Type="int" />
-          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" />
           <Property Name="direccion" Type="varchar" MaxLength="50" />
           <Property Name="fecha" Type="datetime" />
           <Property Name="nombreCliente" Type="varchar" MaxLength="50" />
@@ -354,8 +357,7 @@ advertencia 6002: La tabla o vista 'DD_METALCORE.dbo.Historico' no tiene definid
             <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DD_METALCOREModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -383,6 +385,7 @@ advertencia 6002: La tabla o vista 'DD_METALCORE.dbo.Historico' no tiene definid
           <NavigationProperty Name="Estado" Relationship="Self.FK_Empleado_Empleado" FromRole="Empleado" ToRole="Estado" />
           <NavigationProperty Name="Trabajo" Relationship="Self.FK_Trabajo_Usuario" FromRole="Empleado" ToRole="Trabajo" />
           <NavigationProperty Name="Rol" Relationship="Self.FK_Usuario_Rol" FromRole="Empleado" ToRole="Rol" />
+          <Property Name="intentosPermitidos" Type="Int32" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -446,6 +449,7 @@ advertencia 6002: La tabla o vista 'DD_METALCORE.dbo.Historico' no tiene definid
           <NavigationProperty Name="MaterialesTrabajo" Relationship="Self.FK_Materiales_Productos" FromRole="Productos" ToRole="MaterialesTrabajo" />
           <NavigationProperty Name="Historico" Relationship="Self.FK_Cuentas_Productos" FromRole="Productos" ToRole="Historico" />
           <NavigationProperty Name="Proveedor" Relationship="Self.FK_Productos_Proveedor" FromRole="Productos" ToRole="Proveedor" />
+          <Property Name="idEstado" Type="Int32" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -457,6 +461,7 @@ advertencia 6002: La tabla o vista 'DD_METALCORE.dbo.Historico' no tiene definid
           <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Productos" Relationship="Self.FK_Productos_Proveedor" FromRole="Proveedor" ToRole="Productos" />
+          <Property Name="idEstado" Type="Int32" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -484,7 +489,7 @@ advertencia 6002: La tabla o vista 'DD_METALCORE.dbo.Historico' no tiene definid
           <Property Name="idTrabajo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idUsuario" Type="Int32" />
           <Property Name="idEstadoTrabajo" Type="Int32" />
-          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="fecha" Type="DateTime" Precision="3" />
           <Property Name="nombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -739,6 +744,7 @@ advertencia 6002: La tabla o vista 'DD_METALCORE.dbo.Historico' no tiene definid
           <EntitySetMapping Name="Empleado">
             <EntityTypeMapping TypeName="DD_METALCOREModel.Empleado">
               <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="intentosPermitidos" ColumnName="intentosPermitidos" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="idRol" ColumnName="idRol" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -798,6 +804,7 @@ advertencia 6002: La tabla o vista 'DD_METALCORE.dbo.Historico' no tiene definid
           <EntitySetMapping Name="Productos">
             <EntityTypeMapping TypeName="DD_METALCOREModel.Productos">
               <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
                 <ScalarProperty Name="idProducto" ColumnName="idProducto" />
                 <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -811,6 +818,7 @@ advertencia 6002: La tabla o vista 'DD_METALCORE.dbo.Historico' no tiene definid
           <EntitySetMapping Name="Proveedor">
             <EntityTypeMapping TypeName="DD_METALCOREModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedor">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
                 <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="direccion" ColumnName="direccion" />

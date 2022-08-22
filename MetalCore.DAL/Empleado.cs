@@ -29,6 +29,7 @@ namespace MetalCore.DAL
         public string password { get; set; }
         public string token_recovery { get; set; }
         public Nullable<int> idEstado { get; set; }
+        public Nullable<int> intentosPermitidos { get; set; }
     
         public virtual Estado Estado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

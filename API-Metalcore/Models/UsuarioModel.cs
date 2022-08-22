@@ -92,7 +92,7 @@ namespace API_Metalcore.Models
 
         }
 
-        public bool ValidarExistenciaEmail(string email)
+        public UsuarioObj ValidarExistenciaEmail(string email)
         {
             UsuarioBLL BLL = new UsuarioBLL();
 

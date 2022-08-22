@@ -27,6 +27,7 @@ namespace MetalCore.DAL
         public Nullable<int> cantidad { get; set; }
         public string precio { get; set; }
         public Nullable<int> idCuenta { get; set; }
+        public Nullable<int> idEstado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialesTrabajo> MaterialesTrabajo { get; set; }
