@@ -172,7 +172,11 @@ namespace API_Metalcore.Controllers
         [Route("api/ValidarExistenciaEmail")]
         public IHttpActionResult ValidarExistenciaEmail(string email)
         {
-           
+            if (modelo.ValidarExistenciaEmail(email))
+            {
+                return Ok();
+
+            }
             return BadRequest();
         }
 

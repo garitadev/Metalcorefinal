@@ -24,7 +24,6 @@
     <NavigationProperty Name="Estado" Relationship="Self.FK_Empleado_Empleado" FromRole="Empleado" ToRole="Estado" />
     <NavigationProperty Name="Trabajo" Relationship="Self.FK_Trabajo_Usuario" FromRole="Empleado" ToRole="Trabajo" />
     <NavigationProperty Name="Rol" Relationship="Self.FK_Usuario_Rol" FromRole="Empleado" ToRole="Rol" />
-    <Property Name="intentosPermitidos" Type="Int32" />
   </EntityType>
   <EntityType Name="Estado">
     <Key>
@@ -88,7 +87,6 @@
     <NavigationProperty Name="MaterialesTrabajo" Relationship="Self.FK_Materiales_Productos" FromRole="Productos" ToRole="MaterialesTrabajo" />
     <NavigationProperty Name="Historico" Relationship="Self.FK_Cuentas_Productos" FromRole="Productos" ToRole="Historico" />
     <NavigationProperty Name="Proveedor" Relationship="Self.FK_Productos_Proveedor" FromRole="Productos" ToRole="Proveedor" />
-    <Property Name="idEstado" Type="Int32" />
   </EntityType>
   <EntityType Name="Proveedor">
     <Key>
@@ -100,7 +98,6 @@
     <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Productos" Relationship="Self.FK_Productos_Proveedor" FromRole="Proveedor" ToRole="Productos" />
-    <Property Name="idEstado" Type="Int32" />
   </EntityType>
   <EntityType Name="Rol">
     <Key>
@@ -128,7 +125,7 @@
     <Property Name="idTrabajo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idUsuario" Type="Int32" />
     <Property Name="idEstadoTrabajo" Type="Int32" />
-    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="fecha" Type="DateTime" Precision="3" />
     <Property Name="nombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />

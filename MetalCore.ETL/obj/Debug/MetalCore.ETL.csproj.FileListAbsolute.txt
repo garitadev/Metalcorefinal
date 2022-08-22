@@ -58,9 +58,3 @@ C:\Users\edder\Desktop\Sprint4\Sprint4\MetalCore.ETL\obj\Debug\MetalCore.ETL.csp
 C:\Users\edder\Desktop\Sprint4\Sprint4\MetalCore.ETL\obj\Debug\MetalCore.ETL.csproj.CoreCompileInputs.cache
 C:\Users\edder\Desktop\Sprint4\Sprint4\MetalCore.ETL\obj\Debug\MetalCore.ETL.dll
 C:\Users\edder\Desktop\Sprint4\Sprint4\MetalCore.ETL\obj\Debug\MetalCore.ETL.pdb
-C:\Users\Lenovo\Desktop\DiseñoYDesarrollo-Final\Sprint4\Sprint4\MetalCore.ETL\bin\Debug\MetalCore.ETL.dll
-C:\Users\Lenovo\Desktop\DiseñoYDesarrollo-Final\Sprint4\Sprint4\MetalCore.ETL\bin\Debug\MetalCore.ETL.pdb
-C:\Users\Lenovo\Desktop\DiseñoYDesarrollo-Final\Sprint4\Sprint4\MetalCore.ETL\obj\Debug\MetalCore.ETL.csproj.AssemblyReference.cache
-C:\Users\Lenovo\Desktop\DiseñoYDesarrollo-Final\Sprint4\Sprint4\MetalCore.ETL\obj\Debug\MetalCore.ETL.csproj.CoreCompileInputs.cache
-C:\Users\Lenovo\Desktop\DiseñoYDesarrollo-Final\Sprint4\Sprint4\MetalCore.ETL\obj\Debug\MetalCore.ETL.dll
-C:\Users\Lenovo\Desktop\DiseñoYDesarrollo-Final\Sprint4\Sprint4\MetalCore.ETL\obj\Debug\MetalCore.ETL.pdb

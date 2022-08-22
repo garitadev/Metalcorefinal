@@ -228,7 +228,6 @@
     <Content Include="Content\SB-Admin\js\demo\chart-bar-demo.js" />
     <Content Include="Content\SB-Admin\js\demo\chart-pie-demo.js" />
     <Content Include="Content\SB-Admin\js\demo\datatables-demo.js" />
-    <Content Include="Content\SB-Admin\js\demo\prueba.js" />
     <Content Include="Content\SB-Admin\js\sb-admin-2.js" />
     <Content Include="Content\SB-Admin\js\sb-admin-2.min.js" />
     <Content Include="favicon.ico" />

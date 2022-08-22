@@ -25,7 +25,6 @@ namespace MetalCore.DAL
         public string direccion { get; set; }
         public string telefono { get; set; }
         public string email { get; set; }
-        public Nullable<int> idEstado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Productos> Productos { get; set; }
