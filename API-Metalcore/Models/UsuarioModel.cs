@@ -41,7 +41,7 @@ namespace API_Metalcore.Models
         {
             UsuarioBLL BLL = new UsuarioBLL();
             BLL.ActuaUsuario(obj);
-         
+
         }
 
         public List<SelectListItem> ConsultarRolesCombo()
@@ -54,7 +54,7 @@ namespace API_Metalcore.Models
         public List<SelectListItem> ConsultarEstadosCombo()
         {
             UsuarioBLL BLL = new UsuarioBLL();
-             return (BLL.ConsultarEstadosCombo());
+            return (BLL.ConsultarEstadosCombo());
             //return (respuesta);
         }
 
@@ -68,7 +68,7 @@ namespace API_Metalcore.Models
 
         public UsuarioObj ConsultarUsuarioEspecifico(int idUsuario)
         {
-            UsuarioBLL BLL= new UsuarioBLL();
+            UsuarioBLL BLL = new UsuarioBLL();
             var respuesta = BLL.ConsultarUsuarioEspecifico(idUsuario);
             return (respuesta);
 
@@ -79,7 +79,7 @@ namespace API_Metalcore.Models
         {
             RecoveryPasswordBLL BLL = new RecoveryPasswordBLL();
             //SendEmail(obj.Email, obj.token);
-            return(BLL.GenerarTokenPassword(obj));
+            return (BLL.GenerarTokenPassword(obj));
 
         }
 
@@ -92,7 +92,7 @@ namespace API_Metalcore.Models
 
         }
 
-        public bool ValidarExistenciaEmail(string email)
+        public UsuarioObj ValidarExistenciaEmail(string email)
         {
             UsuarioBLL BLL = new UsuarioBLL();
 
@@ -102,7 +102,7 @@ namespace API_Metalcore.Models
         public bool VerifiExistencia(string Email, string Cedula)
         {
             UsuarioBLL BLL = new UsuarioBLL();
-            return (BLL.VerifiExistencia(Email,Cedula));
+            return (BLL.VerifiExistencia(Email, Cedula));
         }
 
 
@@ -130,7 +130,7 @@ namespace API_Metalcore.Models
                         return resultado;
                     }
                     return null;
-                   
+
 
                 }
                 catch (Exception ex)
@@ -144,11 +144,11 @@ namespace API_Metalcore.Models
             }
         }
 
-      
 
 
-     
-     
+
+
+
 
         private string MontarCorreo(string token)
 

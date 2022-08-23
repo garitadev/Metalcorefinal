@@ -18,6 +18,9 @@ namespace SB_Admin.Controllers
             {
                 UsuarioObj user = (UsuarioObj)Session["User"];
 
+
+                ViewBag.listaPermisos = user.listaPermisos;
+                ViewBag.rol = user.idRol;
                 if (Session["User"] != null)
                 {
 

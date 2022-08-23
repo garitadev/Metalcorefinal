@@ -26,10 +26,12 @@
                     </div>
                 }
             }
-            <div class="col-sm-12">
+        <div class="col-sm-12">
+            @if (ViewBag.rol == 1)
+            {
                 <a class="btn btn-primary" href="@Url.Action("CrearProductoFrm", "Inventario")">Registrar Producto</a>
 
-
+            }
             </div>
         </div>
         <div class="row">

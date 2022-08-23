@@ -44,7 +44,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Dashboard", "Home")">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard (Pendiente Sprint)</span>
+                    <span>Dashboard</span>
                 </a>
             </li>
             <!-- Divider -->
@@ -70,8 +70,13 @@
                             if (item.id == 1)
                             {
 
+                                <h6 class="collapse-header">Registrar:</h6>
+
                                 <a class="collapse-item" href="@Url.Action("AsignarTrabajoFrm", "Trabajo")">Asignar Trabajos</a>
 
+                                <h6 class="collapse-header">Consultar:</h6>
+                                <a class="collapse-item" href="@Url.Action("Consultar", "Trabajo")">Consultar Trabajos</a>
+                                <a class="collapse-item" href="@Url.Action("ConsultarAsigMateri", "Trabajo")">Consultar Material Asignado</a>
 
                             }
                         }
@@ -79,9 +84,7 @@
 
 
 
-                        <h6 class="collapse-header">Registrar:</h6>
-                        <a class="collapse-item" href="@Url.Action("Consultar", "Trabajo")">Consultar Trabajos</a>
-                        <a class="collapse-item" href="@Url.Action("ConsultarAsigMateri", "Trabajo")">Consultar Material Asignado</a>
+
                         <a class="collapse-item" href="@Url.Action("VerTrabajos", "Trabajo")">Ver Trabajos</a>
                     </div>
                 </div>
@@ -95,7 +98,13 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="@Url.Action("Consultar", "Inventario")">Consultar</a>
-                        <a class="collapse-item" href="@Url.Action("CrearProductoFrm", "Inventario")">Registrar Producto</a>
+                        @foreach (var item in listaPermisos)
+                        {
+                            if (item.id == 1)
+                            {
+                                <a class="collapse-item" href="@Url.Action("CrearProductoFrm", "Inventario")">Registrar Producto</a>
+                            }
+                        }
                     </div>
                 </div>
             </li>
@@ -109,7 +118,15 @@
                 <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="@Url.Action("Consultar", "Proveedores")">Consultar</a>
-                        <a class="collapse-item" href="@Url.Action("Crear", "Proveedores")">Registrar Proveedor</a>
+
+
+                        @foreach (var item in listaPermisos)
+                        {
+                            if (item.id == 1)
+                            {
+                                <a class="collapse-item" href="@Url.Action("Crear", "Proveedores")">Registrar Proveedor</a>
+                            }
+                        }
                     </div>
                 </div>
             </li>
@@ -118,26 +135,30 @@
 
 
 
+            @foreach (var item in listaPermisos)
+            {
+                if (item.id == 1)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+                           aria-controls="collapsePages">
+                            <i class="fas fa-user-friends"></i>
+                            <span>Usuarios</span>
+                        </a>
+                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
+                             data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Usuarios:</h6>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-                   aria-controls="collapsePages">
-                    <i class="fas fa-user-friends"></i>
-                    <span>Usuarios</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Usuarios:</h6>
+                                <a class="collapse-item" href="@Url.Action("Consultar", "Usuario")">Usuarios</a>
+                                <a class="collapse-item" href="@Url.Action("CrearUsuarioFrm", "Usuario")">Crear Usuario</a>
 
-                        <a class="collapse-item" href="@Url.Action("Consultar","Usuario")">Usuarios</a>
-                        <a class="collapse-item" href="@Url.Action("CrearUsuarioFrm","Usuario")">Crear Usuario</a>
+                            </div>
+                        </div>
+                    </li>
 
-                    </div>
-                </div>
-            </li>
-
-
+                }
+            }
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

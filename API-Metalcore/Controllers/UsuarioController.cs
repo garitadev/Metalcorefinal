@@ -36,7 +36,7 @@ namespace API_Metalcore.Controllers
                 }
                 return BadRequest();
 
-             
+
 
 
             }
@@ -138,7 +138,7 @@ namespace API_Metalcore.Controllers
         }
         //Helpers
 
-       
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -152,7 +152,7 @@ namespace API_Metalcore.Controllers
 
                 if (usuario != null)
                 {
-                    usuario.TokenJWT  = TokenGenerator.GenerateTokenJwt(obj.email);
+                    usuario.TokenJWT = TokenGenerator.GenerateTokenJwt(obj.email);
                     return Ok(usuario);//hay que devolver todo el obj
 
                 }
@@ -172,12 +172,21 @@ namespace API_Metalcore.Controllers
         [Route("api/ValidarExistenciaEmail")]
         public IHttpActionResult ValidarExistenciaEmail(string email)
         {
-            if (modelo.ValidarExistenciaEmail(email))
-            {
-                return Ok();
 
+
+            UsuarioModel model = new UsuarioModel();
+            try
+            {
+                model.ValidarExistenciaEmail(email);
+                return Ok();
             }
-            return BadRequest();
+            catch
+            {
+
+
+
+                return BadRequest();
+            }
         }
 
         [HttpPost]
@@ -187,7 +196,7 @@ namespace API_Metalcore.Controllers
             UsuarioModel model = new UsuarioModel();
             try
             {
-                if (model.GenerarTokenPassword(obj) ==null)
+                if (model.GenerarTokenPassword(obj) == null)
                 {
                     return BadRequest();
 
